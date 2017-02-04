@@ -1,10 +1,10 @@
 # SLPickerView
 
-Este componente crea de forma facil y sencilla toda la interface y la interaccion de un UIPickerView en las aplicaciones de iOS.
+This component easily creates the entire interface and interaction of a UIPickerView in iOS applications.
 
-Se puede crear 2 tipos de componentes:
-* SLNumbersPickerView: componente con las opciones numericas.
-* SLTextPickerView: componente con las opciones con textos.
+You can create 2 types of components:
+* SLNumbersPickerView: component with numerical options.
+* SLTextPickerView: component with text options.
 
 # Inicialization
 

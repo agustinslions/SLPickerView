@@ -13,6 +13,7 @@
 		410F25921E467DAD00FFB52A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 410F25901E467DAD00FFB52A /* Main.storyboard */; };
 		410F25941E467DAD00FFB52A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 410F25931E467DAD00FFB52A /* Assets.xcassets */; };
 		410F25971E467DAD00FFB52A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 410F25951E467DAD00FFB52A /* LaunchScreen.storyboard */; };
+		410F25A11E467DEA00FFB52A /* SLPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 410F25A01E467DEA00FFB52A /* SLPickerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		410F25931E467DAD00FFB52A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		410F25961E467DAD00FFB52A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		410F25981E467DAE00FFB52A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		410F259F1E467DEA00FFB52A /* SLPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLPickerView.h; sourceTree = "<group>"; };
+		410F25A01E467DEA00FFB52A /* SLPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLPickerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,7 @@
 		410F25861E467DAD00FFB52A /* SLPickerView */ = {
 			isa = PBXGroup;
 			children = (
+				410F259E1E467DEA00FFB52A /* SLPickerView */,
 				410F258A1E467DAD00FFB52A /* AppDelegate.h */,
 				410F258B1E467DAD00FFB52A /* AppDelegate.m */,
 				410F258D1E467DAD00FFB52A /* ViewController.h */,
@@ -77,6 +81,15 @@
 				410F25881E467DAD00FFB52A /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		410F259E1E467DEA00FFB52A /* SLPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				410F259F1E467DEA00FFB52A /* SLPickerView.h */,
+				410F25A01E467DEA00FFB52A /* SLPickerView.m */,
+			);
+			path = SLPickerView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				410F258F1E467DAD00FFB52A /* ViewController.m in Sources */,
+				410F25A11E467DEA00FFB52A /* SLPickerView.m in Sources */,
 				410F258C1E467DAD00FFB52A /* AppDelegate.m in Sources */,
 				410F25891E467DAD00FFB52A /* main.m in Sources */,
 			);

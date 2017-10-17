@@ -15,6 +15,10 @@ typedef NS_ENUM(NSInteger, SLPickerViewType) {
 
 @interface SLPickerView : UIView
 
+- (id)initWithFrame:(CGRect)frame withValues:(NSMutableArray *)values withPickerView:(SLPickerViewType)pickerType;
+
+- (id)initWithFrame:(CGRect)frame withMaxValue:(int)maxValue withMinValue:(int)minValue;
+
 + (void)showNumericalPickerViewWithMaxValue:(int)maxValue
                                withMinValue:(int)minValue
                             withPreSelected:(int)preSelected
@@ -39,3 +43,4 @@ typedef NS_ENUM(NSInteger, SLPickerViewType) {
                      completionBlock:(void (^)(NSString *selectedValue))completionBlock;
 
 @end
+

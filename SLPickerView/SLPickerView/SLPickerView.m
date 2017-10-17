@@ -16,7 +16,7 @@
 @property (nonatomic, assign) int maxValue;
 @property (nonatomic, assign) int minValue;
 
-@property (nonatomic, strong) UIView *transparentView;
+@property (nonatomic, strong) UIView *transparentView; //This is the view that creates the dark effect
 @property (nonatomic, strong) UIPickerView *pickerView;
 @property (nonatomic, strong) UIButton *doneButton;
 
@@ -33,90 +33,70 @@
 
 @implementation SLPickerView
 
-#pragma mark - Public Initialize methods
+#pragma mark - Initialize methods
 
 + (void)showNumericalPickerViewWithMaxValue:(int)maxValue
                                withMinValue:(int)minValue
                             withPreSelected:(int)preSelected
                             completionBlock:(void (^)(int selectedValue))completionBlock
 {
-    SLPickerView *view = [[SLPickerView alloc] initWithMaxValue:maxValue
-                                                   withMinValue:minValue];
+    SLPickerView *view = [[SLPickerView alloc] initWithFrame:[UIScreen mainScreen].bounds withMaxValue:maxValue withMinValue:minValue];
     view.completionNumberBlock = completionBlock;
     [view.pickerView selectRow:preSelected - minValue inComponent:0 animated:NO];
     
+    [view show];
     [view showNumericalPicker];
 }
 
-+ (void)showNumericalPickerViewWithMaxValue:(int)maxValue
-                               withMinValue:(int)minValue
-                            completionBlock:(void (^)(int selectedValue))completionBlock
++ (void)showNumericalPickerViewWithMaxValue:(int)maxValue withMinValue:(int)minValue completionBlock:(void (^)(int selectedValue))completionBlock
 {
-    SLPickerView *view = [[SLPickerView alloc] initWithMaxValue:maxValue
-                                                   withMinValue:minValue];
+    SLPickerView *view = [[SLPickerView alloc] initWithFrame:[UIScreen mainScreen].bounds withMaxValue:maxValue withMinValue:minValue];
     view.completionNumberBlock = completionBlock;
     
+    [view show];
     [view showNumericalPicker];
 }
 
-+ (void)showNumericalPickerViewWithValues:(NSMutableArray *)values
-                          completionBlock:(void (^)(int selectedValue))completionBlock
++ (void)showNumericalPickerViewWithValues:(NSMutableArray *)values completionBlock:(void (^)(int selectedValue))completionBlock
 {
-    SLPickerView *view = [[SLPickerView alloc] initWithValues:values
-                                               withPickerView:SLNumbersPickerView];
+    SLPickerView *view = [[SLPickerView alloc] initWithFrame:[UIScreen mainScreen].bounds withValues:values withPickerView:SLNumbersPickerView];
     view.completionNumberBlock = completionBlock;
     
+    [view show];
     [view showNumericalPicker];
 }
 
-+ (void)showNumericalPickerViewWithValues:(NSMutableArray *)values
-                          withPreSelected:(int)preSelected
-                          completionBlock:(void (^)(int selectedValue))completionBlock
++ (void)showNumericalPickerViewWithValues:(NSMutableArray *)values withPreSelected:(int)preSelected completionBlock:(void (^)(int selectedValue))completionBlock
 {
-    SLPickerView *view = [[SLPickerView alloc] initWithValues:values
-                                               withPickerView:SLNumbersPickerView];
+    SLPickerView *view = [[SLPickerView alloc] initWithFrame:[UIScreen mainScreen].bounds withValues:values withPickerView:SLNumbersPickerView];
     view.completionNumberBlock = completionBlock;
     [view.pickerView selectRow:[values indexOfObject:@(preSelected)] inComponent:0 animated:NO];
     
+    [view show];
     [view showNumericalPicker];
 }
 
 
-+ (void)showTextPickerViewWithValues:(NSMutableArray *)values
-                     completionBlock:(void (^)(NSString *selectedValue))completionBlock
++ (void)showTextPickerViewWithValues:(NSMutableArray *)values completionBlock:(void (^)(NSString *selectedValue))completionBlock
 {
-    SLPickerView *view = [[SLPickerView alloc] initWithValues:values
-                                               withPickerView:SLTextPickerView];
+    SLPickerView *view = [[SLPickerView alloc] initWithFrame:[UIScreen mainScreen].bounds withValues:values withPickerView:SLTextPickerView];
     view.completionTextBlock = completionBlock;
     
+    [view show];
     [view showNumericalPicker];
 }
 
-+ (void)showTextPickerViewWithValues:(NSMutableArray *)values
-                        withSelected:(NSString *)selected
-                     completionBlock:(void (^)(NSString *selectedValue))completionBlock
++ (void)showTextPickerViewWithValues:(NSMutableArray *)values withSelected:(NSString *)selected completionBlock:(void (^)(NSString *selectedValue))completionBlock
 {
-    SLPickerView *view = [[SLPickerView alloc] initWithValues:values
-                                               withPickerView:SLTextPickerView];
+    SLPickerView *view = [[SLPickerView alloc] initWithFrame:[UIScreen mainScreen].bounds withValues:values withPickerView:SLTextPickerView];
     view.completionTextBlock = completionBlock;
     [view.pickerView selectRow:[values indexOfObject:selected] inComponent:0 animated:NO];
-
+    
+    [view show];
     [view showNumericalPicker];
 }
 
-#pragma mark - Private initialization methods
-
-- (id)initWithValues:(NSMutableArray *)values withPickerView:(SLPickerViewType)pickerType;
-{
-    return [self initWithFrame:[UIScreen mainScreen].bounds withValues:values withPickerView:pickerType];
-}
-
-- (id)initWithMaxValue:(int)maxValue withMinValue:(int)minValue
-{
-    return [self initWithFrame:[UIScreen mainScreen].bounds withMaxValue:maxValue withMinValue:minValue];
-}
-
-- (id)initWithFrame:(CGRect)frame withValues:(NSMutableArray *)values withPickerView:(SLPickerViewType)pickerType;
+- (id)initWithFrame:(CGRect)frame withValues:(NSMutableArray *)values withPickerView:(SLPickerViewType)pickerType
 {
     self = [self initWithFrame:frame];
     
@@ -172,6 +152,7 @@
         _tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPicker)];
         [_transparentView addGestureRecognizer:_tapGestureRecognizer];
         
+        
         //Creating Done button
         _doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, self.bounds.size.height, self.bounds.size.width, 50)];
         _doneButton.backgroundColor = [UIColor colorWithRed:47/255.0f green:222/255.0f blue:101/255.0f alpha:1];
@@ -193,8 +174,6 @@
 
 - (void)showNumericalPicker
 {
-    [[UIApplication sharedApplication].keyWindow addSubview:self];
-
     [UIView animateWithDuration:0.5
                      animations:^{
                          _transparentView.alpha = 0.5f;
@@ -205,13 +184,18 @@
                      }];
 }
 
+- (void)show
+{
+    [[UIApplication sharedApplication].keyWindow addSubview:self];
+}
+
 - (void)dismissPicker
 {
     if (self.pickerType == SLNumbersPickerView) {
         NSNumber *numberSelected = [self.valuesArray objectAtIndex:[_pickerView selectedRowInComponent:0]];
         
         self.valueSelected = [numberSelected intValue];
-    
+        
     } else {
         
         self.textSelected = [self.valuesArray objectAtIndex:[_pickerView selectedRowInComponent:0]];
@@ -236,7 +220,7 @@
                          } else {
                              self.completionTextBlock(self.textSelected);
                          }
-
+                         
                          [self removeFromSuperview];
                      }];
 }
@@ -259,11 +243,11 @@
 {
     // The data to return for the row and component (column) that's being passed in
     if (self.valuesArray) {
-    
+        
         if (self.pickerType == SLTextPickerView) return [self.valuesArray objectAtIndex:row];
         
         NSNumber *numberRow = [self.valuesArray objectAtIndex:row];
-
+        
         return [NSString stringWithFormat:@"%i", [numberRow intValue]];
     }
     
@@ -271,3 +255,4 @@
 }
 
 @end
+

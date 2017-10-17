@@ -17,6 +17,5 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "9.0"
   s.source       = { :git => "https://github.com/agustinslions/SLPickerView.git", :tag => "1.0.0" }
   s.source_files = "SLPickerView/SLPickerView/*.{h,m}"
-  s.resources = "SLPickerView/SLPickerView/*.xib"
   s.requires_arc = true
 end
